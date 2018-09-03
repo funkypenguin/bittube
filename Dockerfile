@@ -109,7 +109,7 @@ RUN set -ex \
     && make check \
     && make install
 
-git clone https://github.com/ipbc-dev/bittube.git /src
+RUN git clone https://github.com/ipbc-dev/bittube.git /src
 WORKDIR /src
 #COPY . .
 
