@@ -3,6 +3,9 @@
 # builder stage
 FROM ubuntu:16.04 as builder
 
+ARG BRANCH=2.0.0.3
+ENV BRANCH=${BRANCH}
+
 RUN set -ex && \
     apt-get update && \
     apt-get --no-install-recommends --yes install \
@@ -109,7 +112,7 @@ RUN set -ex \
     && make check \
     && make install
 
-RUN git clone https://github.com/ipbc-dev/bittube.git /src
+RUN git clone -b $BRANCH https://github.com/ipbc-dev/bittube.git /src
 WORKDIR /src
 #COPY . .
 
