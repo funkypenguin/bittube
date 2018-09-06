@@ -1,7 +1,7 @@
 # Multistage docker build, requires docker 17.05
 
 # builder stage
-FROM ubuntu:16.04 as builder
+FROM ubuntu:17.10 as builder
 
 ARG BRANCH=2.0.0.3
 ENV BRANCH=${BRANCH}
@@ -112,7 +112,7 @@ RUN set -ex \
     && make check \
     && make install
 
-RUN git clone -b $BRANCH https://github.com/ipbc-dev/bittube.git /src
+RUN git clone -b $BRANCH --recursive https://github.com/ipbc-dev/bittube.git /src
 WORKDIR /src
 #COPY . .
 
@@ -125,7 +125,7 @@ RUN set -ex && \
     fi
 
 # runtime stage
-FROM ubuntu:16.04
+FROM ubuntu:17.10
 
 RUN set -ex && \
     apt-get update && \
